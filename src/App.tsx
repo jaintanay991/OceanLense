@@ -5,6 +5,7 @@ import type { AppState } from './types';
 import { EarthScene } from './scene/EarthScene';
 import { Header } from './components/ui/Header';
 import { ControlsOverlay } from './components/ui/ControlsOverlay';
+import { ScientificControls } from './components/ui/ScientificControls';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 
 function CanvasLoader() {
@@ -35,11 +36,19 @@ function App() {
     activeRegionType: 'GLOBAL',
     activeOceanId: null,
     activeSeaId: null,
+    scientificVariable: null,
+    scientificDepth: 0,
   });
 
   const handleReset = useCallback(() => {
     setResetTrigger(prev => prev + 1);
-    setAppState({ activeRegionType: 'GLOBAL', activeOceanId: null, activeSeaId: null });
+    setAppState({ 
+      activeRegionType: 'GLOBAL', 
+      activeOceanId: null, 
+      activeSeaId: null,
+      scientificVariable: null,
+      scientificDepth: 0
+    });
   }, []);
 
   return (
@@ -78,6 +87,7 @@ function App() {
         appState={appState}
         setAppState={setAppState}
       />
+      <ScientificControls appState={appState} setAppState={setAppState} />
     </div>
   );
 }

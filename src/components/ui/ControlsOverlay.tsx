@@ -16,9 +16,9 @@ export function ControlsOverlay({ cinematicMode, onToggleCinematic, onReset, app
   
   const handleSelectOcean = (oceanId: string | null) => {
     if (!oceanId) {
-      setAppState(() => ({ activeRegionType: 'GLOBAL', activeOceanId: null, activeSeaId: null }));
+      setAppState(prev => ({ ...prev, activeRegionType: 'GLOBAL', activeOceanId: null, activeSeaId: null }));
     } else {
-      setAppState(() => ({ activeRegionType: 'OCEAN', activeOceanId: oceanId, activeSeaId: null }));
+      setAppState(prev => ({ ...prev, activeRegionType: 'OCEAN', activeOceanId: oceanId, activeSeaId: null }));
     }
   };
 

@@ -10,6 +10,7 @@ import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import type { AppState } from '../types';
 import { OCEANS } from '../data/oceans';
 import { OceanHighlight } from '../components/earth/OceanHighlight';
+import { ScientificOverlay } from '../components/earth/ScientificOverlay';
 
 interface EarthSceneProps {
   cinematicMode: boolean;
@@ -129,6 +130,7 @@ export function EarthScene({ cinematicMode, resetTrigger, appState }: EarthScene
         <Clouds />
         <Atmosphere />
         <OceanHighlight appState={appState} />
+        <ScientificOverlay appState={appState} />
       </group>
 
       <OrbitControls 
