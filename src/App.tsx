@@ -16,7 +16,7 @@ function CanvasLoader() {
           <div className="absolute inset-2 rounded-full border-r-2 border-blue-500 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
         </div>
         <h2 className="text-xl font-light tracking-[0.2em] text-white m-0">
-          OCEANSCOPE
+          OCEANLENS
         </h2>
         <p className="text-cyan-400/80 text-xs tracking-[0.2em] uppercase mt-4 text-center whitespace-nowrap">
           Initializing Environment... {Math.round(progress)}%

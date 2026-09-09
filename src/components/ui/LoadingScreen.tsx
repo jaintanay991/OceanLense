@@ -7,7 +7,7 @@ export function LoadingScreen() {
       </div>
       
       <h2 className="text-xl font-light tracking-[0.2em] text-white m-0">
-        OCEANSCOPE
+        OCEANLENS
       </h2>
       <p className="text-cyan-400/60 text-xs tracking-[0.3em] uppercase mt-4">
         Initializing Global 3D Environment...
