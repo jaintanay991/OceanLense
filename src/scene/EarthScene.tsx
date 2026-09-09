@@ -7,12 +7,50 @@ import { Atmosphere } from '../components/earth/Atmosphere';
 import { Clouds } from '../components/earth/Clouds';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
+import type { AppState } from '../types';
+import { OCEANS } from '../data/oceans';
+import { OceanHighlight } from '../components/earth/OceanHighlight';
+
 interface EarthSceneProps {
   cinematicMode: boolean;
   resetTrigger: number;
+  appState: AppState;
 }
 
-export function EarthScene({ cinematicMode, resetTrigger }: EarthSceneProps) {
+function getCameraTargetPos(appState: AppState): THREE.Vector3 {
+  if (appState.activeRegionType === 'GLOBAL' || !appState.activeOceanId) {
+    return new THREE.Vector3(0, 0, 5.5);
+  }
+
+  let lat = 0;
+  let lon = 0;
+  let dist = 4.5;
+
+  const ocean = OCEANS[appState.activeOceanId];
+  if (ocean) {
+    lat = ocean.coordinates[0];
+    lon = ocean.coordinates[1];
+    
+    if (appState.activeRegionType === 'SEA' && appState.activeSeaId) {
+      const sea = ocean.majorSeas.find(s => s.id === appState.activeSeaId);
+      if (sea) {
+        lat = sea.coordinates[0];
+        lon = sea.coordinates[1];
+        dist = 3.2; // closer for seas
+      }
+    }
+  }
+
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  return new THREE.Vector3(
+    -(dist * Math.sin(phi) * Math.cos(theta)),
+    dist * Math.cos(phi),
+    dist * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+export function EarthScene({ cinematicMode, resetTrigger, appState }: EarthSceneProps) {
   const earthGroupRef = useRef<THREE.Group>(null);
   const controlsRef = useRef<OrbitControlsImpl>(null);
   const lastResetTrigger = useRef(resetTrigger);
@@ -29,6 +67,16 @@ export function EarthScene({ cinematicMode, resetTrigger }: EarthSceneProps) {
       state.camera.position.set(0, 0, 5.5);
       state.camera.lookAt(0, 0, 0);
       lastResetTrigger.current = resetTrigger;
+    }
+
+    // Lerp camera to target
+    const currentTarget = getCameraTargetPos(appState);
+    if (!cinematicMode && appState.activeRegionType !== 'GLOBAL') {
+      state.camera.position.lerp(currentTarget, 2.5 * delta);
+      state.camera.lookAt(0, 0, 0);
+      if (controlsRef.current) {
+         controlsRef.current.update();
+      }
     }
 
     // Cinematic auto-rotation
@@ -80,6 +128,7 @@ export function EarthScene({ cinematicMode, resetTrigger }: EarthSceneProps) {
         <Earth />
         <Clouds />
         <Atmosphere />
+        <OceanHighlight appState={appState} />
       </group>
 
       <OrbitControls 

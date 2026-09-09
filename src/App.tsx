@@ -1,6 +1,7 @@
 import { useState, Suspense, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html, useProgress } from '@react-three/drei';
+import type { AppState } from './types';
 import { EarthScene } from './scene/EarthScene';
 import { Header } from './components/ui/Header';
 import { ControlsOverlay } from './components/ui/ControlsOverlay';
@@ -30,8 +31,15 @@ function App() {
   const [cinematicMode, setCinematicMode] = useState(false);
   const [resetTrigger, setResetTrigger] = useState(0);
 
+  const [appState, setAppState] = useState<AppState>({
+    activeRegionType: 'GLOBAL',
+    activeOceanId: null,
+    activeSeaId: null,
+  });
+
   const handleReset = useCallback(() => {
     setResetTrigger(prev => prev + 1);
+    setAppState({ activeRegionType: 'GLOBAL', activeOceanId: null, activeSeaId: null });
   }, []);
 
   return (
@@ -56,6 +64,7 @@ function App() {
               <EarthScene 
                 cinematicMode={cinematicMode} 
                 resetTrigger={resetTrigger}
+                appState={appState}
               />
             </Suspense>
           </Canvas>
@@ -66,6 +75,8 @@ function App() {
         cinematicMode={cinematicMode}
         onToggleCinematic={() => setCinematicMode(prev => !prev)}
         onReset={handleReset}
+        appState={appState}
+        setAppState={setAppState}
       />
     </div>
   );
