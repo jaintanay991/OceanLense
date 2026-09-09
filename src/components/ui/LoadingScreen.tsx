@@ -6,7 +6,7 @@ export function LoadingScreen() {
         <div className="absolute inset-2 rounded-full border-r-2 border-blue-500 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
       </div>
       
-      <h2 className="text-xl font-light tracking-[0.2em] text-white m-0">
+      <h2 className="text-xl font-bold tracking-[0.2em] text-white m-0">
         OCEANLENS
       </h2>
       <p className="text-cyan-400/60 text-xs tracking-[0.3em] uppercase mt-4">

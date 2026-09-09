@@ -16,7 +16,7 @@ export function Header({ cinematicMode }: HeaderProps) {
         </div>
         
         <div>
-          <h1 className="text-2xl font-light tracking-[0.2em] text-white m-0 leading-none">
+          <h1 className="text-2xl font-bold tracking-[0.2em] text-white m-0 leading-none">
             OCEANLENS
           </h1>
           <p className="text-cyan-400 text-xs tracking-widest uppercase mt-1 opacity-80">
