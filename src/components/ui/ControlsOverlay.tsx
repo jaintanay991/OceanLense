@@ -157,6 +157,17 @@ export function ControlsOverlay({ cinematicMode, onToggleCinematic, onReset, app
                 <p className="text-sm text-white font-medium">{activeOcean.averageDepth}</p>
               </div>
             </div>
+            
+            <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
+              <div>
+                <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-1">Continents</h3>
+                <p className="text-xs text-white/80">{activeOcean.surroundingContinents.join(', ')}</p>
+              </div>
+              <div>
+                <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-1">Currents</h3>
+                <p className="text-xs text-white/80">{activeOcean.majorCurrents.join(', ')}</p>
+              </div>
+            </div>
 
             <div className="border-t border-white/10 pt-4">
               <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-3">Major Seas</h3>
