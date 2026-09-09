@@ -45,20 +45,25 @@ export function EarthScene({ cinematicMode, resetTrigger }: EarthSceneProps) {
       <color attach="background" args={['#020408']} />
       
       {/* Lighting */}
-      <ambientLight intensity={0.15} />
-      <hemisphereLight args={['#ffffff', '#000000', 0.3]} />
+      <ambientLight intensity={0.8} color="#e0e8f0" />
+      <hemisphereLight args={['#ffffff', '#0a1a2a', 1.0]} />
       
       {/* Main sun light */}
       <directionalLight 
         position={[5, 3, 5]} 
-        intensity={2.5} 
+        intensity={3.5} 
         color="#ffffff" 
       />
-      {/* Back/Fill light to keep the shadow side readable */}
+      {/* Back/Fill lights to keep the shadow side highly readable */}
       <directionalLight 
-        position={[-5, -3, -5]} 
-        intensity={0.4} 
+        position={[-5, 3, -5]} 
+        intensity={1.5} 
         color="#8bb0d0" 
+      />
+      <directionalLight 
+        position={[0, -5, 0]} 
+        intensity={0.8} 
+        color="#2a3a5a" 
       />
 
       <Stars 
