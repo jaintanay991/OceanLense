@@ -4,6 +4,8 @@ import { Html, useProgress } from '@react-three/drei';
 import type { AppState } from './types';
 import { EarthScene } from './scene/EarthScene';
 import { Header } from './components/ui/Header';
+
+import { ObservationProfile } from './components/ui/ObservationProfile';
 import { ControlsOverlay } from './components/ui/ControlsOverlay';
 import { ScientificControls } from './components/ui/ScientificControls';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
@@ -38,6 +40,13 @@ function App() {
     activeSeaId: null,
     scientificVariable: null,
     scientificDepth: 0,
+    scientificOpacity: 0.85,
+    scientificRange: null,
+    currentPlaying: true,
+    currentSpeed: 1.0,
+    activeObservations: [],
+    selectedObservationId: null,
+    isModelVsObs: false,
   });
 
   const handleReset = useCallback(() => {
@@ -47,7 +56,14 @@ function App() {
       activeOceanId: null, 
       activeSeaId: null,
       scientificVariable: null,
-      scientificDepth: 0
+      scientificDepth: 0,
+      scientificOpacity: 0.85,
+      scientificRange: null,
+      currentPlaying: true,
+      currentSpeed: 1.0,
+      activeObservations: [],
+      selectedObservationId: null,
+      isModelVsObs: false,
     });
   }, []);
 
@@ -74,6 +90,7 @@ function App() {
                 cinematicMode={cinematicMode} 
                 resetTrigger={resetTrigger}
                 appState={appState}
+                setAppState={setAppState}
               />
             </Suspense>
           </Canvas>
@@ -88,6 +105,7 @@ function App() {
         setAppState={setAppState}
       />
       <ScientificControls appState={appState} setAppState={setAppState} />
+      <ObservationProfile appState={appState} setAppState={setAppState} />
     </div>
   );
 }

@@ -7,15 +7,19 @@ import { Atmosphere } from '../components/earth/Atmosphere';
 import { Clouds } from '../components/earth/Clouds';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
-import type { AppState } from '../types';
+import type { AppState, SetAppState } from '../types';
 import { OCEANS } from '../data/oceans';
 import { OceanHighlight } from '../components/earth/OceanHighlight';
 import { ScientificOverlay } from '../components/earth/ScientificOverlay';
+import { ObservationOverlay } from '../components/earth/ObservationOverlay';
+import { ModelVsObsOverlay } from '../components/earth/ModelVsObsOverlay';
+import { CurrentOverlay } from '../components/earth/CurrentOverlay';
 
 interface EarthSceneProps {
   cinematicMode: boolean;
   resetTrigger: number;
   appState: AppState;
+  setAppState: SetAppState;
 }
 
 function getCameraTargetPos(appState: AppState): THREE.Vector3 {
@@ -51,7 +55,7 @@ function getCameraTargetPos(appState: AppState): THREE.Vector3 {
   );
 }
 
-export function EarthScene({ cinematicMode, resetTrigger, appState }: EarthSceneProps) {
+export function EarthScene({ cinematicMode, resetTrigger, appState, setAppState }: EarthSceneProps) {
   const earthGroupRef = useRef<THREE.Group>(null);
   const controlsRef = useRef<OrbitControlsImpl>(null);
   const lastResetTrigger = useRef(resetTrigger);
@@ -130,7 +134,10 @@ export function EarthScene({ cinematicMode, resetTrigger, appState }: EarthScene
         <Clouds />
         <Atmosphere />
         <OceanHighlight appState={appState} />
-        <ScientificOverlay appState={appState} />
+        <ScientificOverlay appState={appState} setAppState={setAppState} />
+        <CurrentOverlay appState={appState} setAppState={setAppState} />
+        <ObservationOverlay appState={appState} setAppState={setAppState} />
+        <ModelVsObsOverlay appState={appState} setAppState={setAppState} />
       </group>
 
       <OrbitControls 

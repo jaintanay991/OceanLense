@@ -1,0 +1,726 @@
+{
+  "metadata": {
+    "source": "DEMONSTRATION DATA (Phase 7 Fallback)",
+    "generatedAt": 1789025961549,
+    "status": "LATEST AVAILABLE",
+    "description": "Synthetic time-series data for demonstrating Phase 7 trends, anomalies, and forecasting capabilities without an external real-time API."
+  },
+  "regionalTimeSeries": {
+    "pacific": {
+      "temperature": {
+        "baseline": 20.5,
+        "series": [
+          {
+            "timestamp": 1786433961549,
+            "value": 20.33
+          },
+          {
+            "timestamp": 1786520361549,
+            "value": 20.62
+          },
+          {
+            "timestamp": 1786606761549,
+            "value": 20.78
+          },
+          {
+            "timestamp": 1786693161549,
+            "value": 20.67
+          },
+          {
+            "timestamp": 1786779561549,
+            "value": 20.73
+          },
+          {
+            "timestamp": 1786865961549,
+            "value": 20.73
+          },
+          {
+            "timestamp": 1786952361549,
+            "value": 20.86
+          },
+          {
+            "timestamp": 1787038761549,
+            "value": 21.13
+          },
+          {
+            "timestamp": 1787125161549,
+            "value": 21.23
+          },
+          {
+            "timestamp": 1787211561549,
+            "value": 21.09
+          },
+          {
+            "timestamp": 1787297961549,
+            "value": 21.24
+          },
+          {
+            "timestamp": 1787384361549,
+            "value": 21.4
+          },
+          {
+            "timestamp": 1787470761549,
+            "value": 21.41
+          },
+          {
+            "timestamp": 1787557161549,
+            "value": 21.34
+          },
+          {
+            "timestamp": 1787643561549,
+            "value": 21.32
+          },
+          {
+            "timestamp": 1787729961549,
+            "value": 21.12
+          },
+          {
+            "timestamp": 1787816361549,
+            "value": 21.18
+          },
+          {
+            "timestamp": 1787902761549,
+            "value": 21.24
+          },
+          {
+            "timestamp": 1787989161549,
+            "value": 21.22
+          },
+          {
+            "timestamp": 1788075561549,
+            "value": 21.14
+          },
+          {
+            "timestamp": 1788161961549,
+            "value": 21.16
+          },
+          {
+            "timestamp": 1788248361549,
+            "value": 21.56
+          },
+          {
+            "timestamp": 1788334761549,
+            "value": 21.43
+          },
+          {
+            "timestamp": 1788421161549,
+            "value": 21.56
+          },
+          {
+            "timestamp": 1788507561549,
+            "value": 21.49
+          },
+          {
+            "timestamp": 1788593961549,
+            "value": 21.51
+          },
+          {
+            "timestamp": 1788680361549,
+            "value": 21.76
+          },
+          {
+            "timestamp": 1788766761549,
+            "value": 21.55
+          },
+          {
+            "timestamp": 1788853161549,
+            "value": 21.95
+          },
+          {
+            "timestamp": 1788939561549,
+            "value": 21.97
+          },
+          {
+            "timestamp": 1789025961549,
+            "value": 21.81
+          }
+        ]
+      }
+    },
+    "atlantic": {
+      "temperature": {
+        "baseline": 18.2,
+        "series": [
+          {
+            "timestamp": 1786433961549,
+            "value": 18.26
+          },
+          {
+            "timestamp": 1786520361549,
+            "value": 18.21
+          },
+          {
+            "timestamp": 1786606761549,
+            "value": 18.14
+          },
+          {
+            "timestamp": 1786693161549,
+            "value": 18.28
+          },
+          {
+            "timestamp": 1786779561549,
+            "value": 18.29
+          },
+          {
+            "timestamp": 1786865961549,
+            "value": 18.32
+          },
+          {
+            "timestamp": 1786952361549,
+            "value": 18.12
+          },
+          {
+            "timestamp": 1787038761549,
+            "value": 18.34
+          },
+          {
+            "timestamp": 1787125161549,
+            "value": 18.08
+          },
+          {
+            "timestamp": 1787211561549,
+            "value": 18.12
+          },
+          {
+            "timestamp": 1787297961549,
+            "value": 18.22
+          },
+          {
+            "timestamp": 1787384361549,
+            "value": 18.1
+          },
+          {
+            "timestamp": 1787470761549,
+            "value": 17.98
+          },
+          {
+            "timestamp": 1787557161549,
+            "value": 18.03
+          },
+          {
+            "timestamp": 1787643561549,
+            "value": 18.11
+          },
+          {
+            "timestamp": 1787729961549,
+            "value": 17.88
+          },
+          {
+            "timestamp": 1787816361549,
+            "value": 17.94
+          },
+          {
+            "timestamp": 1787902761549,
+            "value": 17.88
+          },
+          {
+            "timestamp": 1787989161549,
+            "value": 17.86
+          },
+          {
+            "timestamp": 1788075561549,
+            "value": 17.82
+          },
+          {
+            "timestamp": 1788161961549,
+            "value": 17.83
+          },
+          {
+            "timestamp": 1788248361549,
+            "value": 17.54
+          },
+          {
+            "timestamp": 1788334761549,
+            "value": 17.53
+          },
+          {
+            "timestamp": 1788421161549,
+            "value": 17.64
+          },
+          {
+            "timestamp": 1788507561549,
+            "value": 17.6
+          },
+          {
+            "timestamp": 1788593961549,
+            "value": 17.7
+          },
+          {
+            "timestamp": 1788680361549,
+            "value": 17.46
+          },
+          {
+            "timestamp": 1788766761549,
+            "value": 17.57
+          },
+          {
+            "timestamp": 1788853161549,
+            "value": 17.59
+          },
+          {
+            "timestamp": 1788939561549,
+            "value": 17.54
+          },
+          {
+            "timestamp": 1789025961549,
+            "value": 17.6
+          }
+        ]
+      }
+    },
+    "indian": {
+      "temperature": {
+        "baseline": 26.5,
+        "series": [
+          {
+            "timestamp": 1786433961549,
+            "value": 26.46
+          },
+          {
+            "timestamp": 1786520361549,
+            "value": 26.64
+          },
+          {
+            "timestamp": 1786606761549,
+            "value": 26.9
+          },
+          {
+            "timestamp": 1786693161549,
+            "value": 26.86
+          },
+          {
+            "timestamp": 1786779561549,
+            "value": 26.92
+          },
+          {
+            "timestamp": 1786865961549,
+            "value": 27.29
+          },
+          {
+            "timestamp": 1786952361549,
+            "value": 27.36
+          },
+          {
+            "timestamp": 1787038761549,
+            "value": 27.53
+          },
+          {
+            "timestamp": 1787125161549,
+            "value": 27.61
+          },
+          {
+            "timestamp": 1787211561549,
+            "value": 27.42
+          },
+          {
+            "timestamp": 1787297961549,
+            "value": 27.41
+          },
+          {
+            "timestamp": 1787384361549,
+            "value": 27.45
+          },
+          {
+            "timestamp": 1787470761549,
+            "value": 27.68
+          },
+          {
+            "timestamp": 1787557161549,
+            "value": 27.73
+          },
+          {
+            "timestamp": 1787643561549,
+            "value": 27.7
+          },
+          {
+            "timestamp": 1787729961549,
+            "value": 27.98
+          },
+          {
+            "timestamp": 1787816361549,
+            "value": 27.66
+          },
+          {
+            "timestamp": 1787902761549,
+            "value": 27.62
+          },
+          {
+            "timestamp": 1787989161549,
+            "value": 27.83
+          },
+          {
+            "timestamp": 1788075561549,
+            "value": 27.93
+          },
+          {
+            "timestamp": 1788161961549,
+            "value": 27.66
+          },
+          {
+            "timestamp": 1788248361549,
+            "value": 27.98
+          },
+          {
+            "timestamp": 1788334761549,
+            "value": 28.12
+          },
+          {
+            "timestamp": 1788421161549,
+            "value": 27.9
+          },
+          {
+            "timestamp": 1788507561549,
+            "value": 28.32
+          },
+          {
+            "timestamp": 1788593961549,
+            "value": 28.27
+          },
+          {
+            "timestamp": 1788680361549,
+            "value": 28.24
+          },
+          {
+            "timestamp": 1788766761549,
+            "value": 28.3
+          },
+          {
+            "timestamp": 1788853161549,
+            "value": 28.67
+          },
+          {
+            "timestamp": 1788939561549,
+            "value": 28.65
+          },
+          {
+            "timestamp": 1789025961549,
+            "value": 28.8
+          }
+        ]
+      }
+    },
+    "southern": {
+      "temperature": {
+        "baseline": 2.1,
+        "series": [
+          {
+            "timestamp": 1786433961549,
+            "value": 2.2
+          },
+          {
+            "timestamp": 1786520361549,
+            "value": 2.03
+          },
+          {
+            "timestamp": 1786606761549,
+            "value": 2.26
+          },
+          {
+            "timestamp": 1786693161549,
+            "value": 2.17
+          },
+          {
+            "timestamp": 1786779561549,
+            "value": 2.19
+          },
+          {
+            "timestamp": 1786865961549,
+            "value": 2.21
+          },
+          {
+            "timestamp": 1786952361549,
+            "value": 2.33
+          },
+          {
+            "timestamp": 1787038761549,
+            "value": 2.36
+          },
+          {
+            "timestamp": 1787125161549,
+            "value": 2.29
+          },
+          {
+            "timestamp": 1787211561549,
+            "value": 2.36
+          },
+          {
+            "timestamp": 1787297961549,
+            "value": 2.32
+          },
+          {
+            "timestamp": 1787384361549,
+            "value": 2.29
+          },
+          {
+            "timestamp": 1787470761549,
+            "value": 2.3
+          },
+          {
+            "timestamp": 1787557161549,
+            "value": 2.32
+          },
+          {
+            "timestamp": 1787643561549,
+            "value": 2.2
+          },
+          {
+            "timestamp": 1787729961549,
+            "value": 2.3
+          },
+          {
+            "timestamp": 1787816361549,
+            "value": 2.34
+          },
+          {
+            "timestamp": 1787902761549,
+            "value": 2.27
+          },
+          {
+            "timestamp": 1787989161549,
+            "value": 2.31
+          },
+          {
+            "timestamp": 1788075561549,
+            "value": 2.23
+          },
+          {
+            "timestamp": 1788161961549,
+            "value": 2.2
+          },
+          {
+            "timestamp": 1788248361549,
+            "value": 2.18
+          },
+          {
+            "timestamp": 1788334761549,
+            "value": 2.14
+          },
+          {
+            "timestamp": 1788421161549,
+            "value": 2.24
+          },
+          {
+            "timestamp": 1788507561549,
+            "value": 2.3
+          },
+          {
+            "timestamp": 1788593961549,
+            "value": 2.2
+          },
+          {
+            "timestamp": 1788680361549,
+            "value": 2.29
+          },
+          {
+            "timestamp": 1788766761549,
+            "value": 2.35
+          },
+          {
+            "timestamp": 1788853161549,
+            "value": 2.37
+          },
+          {
+            "timestamp": 1788939561549,
+            "value": 2.42
+          },
+          {
+            "timestamp": 1789025961549,
+            "value": 2.4
+          }
+        ]
+      }
+    },
+    "arctic": {
+      "temperature": {
+        "baseline": -1.2,
+        "series": [
+          {
+            "timestamp": 1786433961549,
+            "value": -1.34
+          },
+          {
+            "timestamp": 1786520361549,
+            "value": -1.29
+          },
+          {
+            "timestamp": 1786606761549,
+            "value": -1.18
+          },
+          {
+            "timestamp": 1786693161549,
+            "value": -0.57
+          },
+          {
+            "timestamp": 1786779561549,
+            "value": -0.65
+          },
+          {
+            "timestamp": 1786865961549,
+            "value": -0.73
+          },
+          {
+            "timestamp": 1786952361549,
+            "value": -0.18
+          },
+          {
+            "timestamp": 1787038761549,
+            "value": -0.04
+          },
+          {
+            "timestamp": 1787125161549,
+            "value": -0.15
+          },
+          {
+            "timestamp": 1787211561549,
+            "value": -0.06
+          },
+          {
+            "timestamp": 1787297961549,
+            "value": 0.21
+          },
+          {
+            "timestamp": 1787384361549,
+            "value": 0.13
+          },
+          {
+            "timestamp": 1787470761549,
+            "value": 0.29
+          },
+          {
+            "timestamp": 1787557161549,
+            "value": 0.44
+          },
+          {
+            "timestamp": 1787643561549,
+            "value": 0.58
+          },
+          {
+            "timestamp": 1787729961549,
+            "value": 0.42
+          },
+          {
+            "timestamp": 1787816361549,
+            "value": 0.14
+          },
+          {
+            "timestamp": 1787902761549,
+            "value": 0.19
+          },
+          {
+            "timestamp": 1787989161549,
+            "value": 0.33
+          },
+          {
+            "timestamp": 1788075561549,
+            "value": 0.37
+          },
+          {
+            "timestamp": 1788161961549,
+            "value": 0.83
+          },
+          {
+            "timestamp": 1788248361549,
+            "value": 0.65
+          },
+          {
+            "timestamp": 1788334761549,
+            "value": 1
+          },
+          {
+            "timestamp": 1788421161549,
+            "value": 0.62
+          },
+          {
+            "timestamp": 1788507561549,
+            "value": 1.2
+          },
+          {
+            "timestamp": 1788593961549,
+            "value": 0.83
+          },
+          {
+            "timestamp": 1788680361549,
+            "value": 1.43
+          },
+          {
+            "timestamp": 1788766761549,
+            "value": 1.29
+          },
+          {
+            "timestamp": 1788853161549,
+            "value": 1.6
+          },
+          {
+            "timestamp": 1788939561549,
+            "value": 1.33
+          },
+          {
+            "timestamp": 1789025961549,
+            "value": 1.61
+          }
+        ]
+      }
+    }
+  },
+  "pointAnomalies": [
+    {
+      "id": "anom-01",
+      "region": "pacific",
+      "latitude": 0,
+      "longitude": -120,
+      "variable": "temperature",
+      "currentValue": 29.5,
+      "baseline": 26.5,
+      "anomaly": 3,
+      "severity": "EXTREME",
+      "timestamp": 1789025961549,
+      "source": "DEMONSTRATION DATA"
+    },
+    {
+      "id": "anom-02",
+      "region": "atlantic",
+      "latitude": 35,
+      "longitude": -65,
+      "variable": "temperature",
+      "currentValue": 24.1,
+      "baseline": 22.5,
+      "anomaly": 1.6,
+      "severity": "SIGNIFICANT",
+      "timestamp": 1788939561549,
+      "source": "DEMONSTRATION DATA"
+    },
+    {
+      "id": "anom-03",
+      "region": "indian",
+      "latitude": 10,
+      "longitude": 60,
+      "variable": "salinity",
+      "currentValue": 36.5,
+      "baseline": 35,
+      "anomaly": 1.5,
+      "severity": "WATCH",
+      "timestamp": 1789025961549,
+      "source": "DEMONSTRATION DATA"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-01",
+      "type": "Temperature Anomaly",
+      "region": "pacific",
+      "detectedAt": 1788853161549,
+      "severity": "EXTREME",
+      "description": "A sudden spike of +3.0 °C detected in the equatorial Pacific, indicative of emerging marine heatwave conditions.",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "evt-02",
+      "type": "Model Disagreement",
+      "region": "arctic",
+      "detectedAt": 1788593961549,
+      "severity": "SIGNIFICANT",
+      "description": "Observed surface temperatures are deviating significantly from the WOA23 climatological baseline by > +1.5 °C.",
+      "status": "ACTIVE"
+    }
+  ]
+}

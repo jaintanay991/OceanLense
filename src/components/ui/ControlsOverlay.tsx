@@ -42,7 +42,7 @@ export function ControlsOverlay({ cinematicMode, onToggleCinematic, onReset, app
     <>
       {/* Navigation Foundation */}
       <div 
-        className={`absolute left-6 top-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
+        className={`absolute left-6 top-28 z-10 transition-opacity duration-1000 ${
           cinematicMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
