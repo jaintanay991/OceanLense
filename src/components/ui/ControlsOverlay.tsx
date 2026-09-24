@@ -1,4 +1,4 @@
-import { Camera, RotateCcw, Search, ChevronRight, X } from 'lucide-react';
+﻿import { Camera, RotateCcw, Search, ChevronRight, X } from 'lucide-react';
 import type { AppState, SetAppState } from '../../types';
 import { OCEANS } from '../../data/oceans';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ export function ControlsOverlay({ cinematicMode, onToggleCinematic, onReset, app
           cinematicMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-2 overflow-y-auto scientific-controls-scroll" style={{ maxHeight: "calc(100vh - 480px)", paddingRight: "8px" }}>
           <button
             onClick={() => handleSelectOcean(null)}
             className={`text-left text-xs tracking-widest uppercase transition-colors duration-300 ${
@@ -236,3 +236,5 @@ export function ControlsOverlay({ cinematicMode, onToggleCinematic, onReset, app
     </>
   );
 }
+
+

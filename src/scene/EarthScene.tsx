@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+﻿import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
@@ -14,6 +14,7 @@ import { ScientificOverlay } from '../components/earth/ScientificOverlay';
 import { ObservationOverlay } from '../components/earth/ObservationOverlay';
 import { ModelVsObsOverlay } from '../components/earth/ModelVsObsOverlay';
 import { CurrentOverlay } from '../components/earth/CurrentOverlay';
+import { ChlorophyllOverlay } from '../components/earth/ChlorophyllOverlay';
 
 interface EarthSceneProps {
   cinematicMode: boolean;
@@ -135,6 +136,7 @@ export function EarthScene({ cinematicMode, resetTrigger, appState, setAppState 
         <Atmosphere />
         <OceanHighlight appState={appState} />
         <ScientificOverlay appState={appState} setAppState={setAppState} />
+        <ChlorophyllOverlay appState={appState} setAppState={setAppState} />
         <CurrentOverlay appState={appState} setAppState={setAppState} />
         <ObservationOverlay appState={appState} setAppState={setAppState} />
         <ModelVsObsOverlay appState={appState} setAppState={setAppState} />
@@ -156,3 +158,4 @@ export function EarthScene({ cinematicMode, resetTrigger, appState, setAppState 
     </>
   );
 }
+

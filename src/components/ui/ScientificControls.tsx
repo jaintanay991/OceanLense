@@ -1,3 +1,4 @@
+﻿import { useState, useRef, useEffect } from 'react';
 import type { AppState, SetAppState } from '../../types';
 import { Layers } from 'lucide-react';
 
@@ -7,7 +8,15 @@ interface ScientificControlsProps {
 }
 
 export function ScientificControls({ appState, setAppState }: ScientificControlsProps) {
-  const handleToggleVariable = (variable: 'temperature' | 'salinity' | 'currents') => {
+  const [initialHeight, setInitialHeight] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current && !initialHeight) {
+      setInitialHeight(containerRef.current.offsetHeight);
+    }
+  }, []);
+  const handleToggleVariable = (variable: 'temperature' | 'salinity' | 'chlorophyll' | 'currents') => {
     setAppState(prev => ({
       ...prev,
       scientificVariable: prev.scientificVariable === variable ? null : variable,
@@ -24,9 +33,10 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
   // We will restrict depth to Surface for currents.
   
   const isCurrents = appState.scientificVariable === 'currents';
+  const isSurfaceOnly = isCurrents || appState.scientificVariable === 'chlorophyll';
 
   return (
-    <div className="absolute left-6 bottom-6 z-10 w-64">
+    <div ref={containerRef} className="absolute left-6 bottom-6 z-10 w-64 max-h-[calc(100vh-140px)] overflow-y-auto scientific-controls-scroll" style={{ height: initialHeight ? initialHeight + 'px' : 'auto' }}>
       {/* Variable Toggle */}
       <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-4 mb-4 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
         <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-3 flex items-center">
@@ -55,6 +65,18 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
             }`}
           >
             Salinity
+          </button>
+          
+          
+          <button 
+            onClick={() => handleToggleVariable('chlorophyll')}
+            className={`px-4 py-2 rounded text-xs tracking-widest uppercase transition-all duration-300 border ${
+              appState.scientificVariable === 'chlorophyll' 
+                ? 'bg-teal-500/20 border-teal-300 text-teal-300' 
+                : 'bg-white/5 border-transparent text-white/70 hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            Chlorophyll
           </button>
           
           <button 
@@ -130,7 +152,7 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
           <div className="mb-6">
             <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-3">Depth Level</h3>
             <div className="flex space-x-2">
-              {(isCurrents ? [0] : depths).map(depth => (
+              {(isSurfaceOnly ? [0] : depths).map(depth => (
                 <button
                   key={depth}
                   onClick={() => handleDepthChange(depth)}
@@ -150,12 +172,9 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
           <div>
             <h3 className="text-[10px] tracking-widest text-white/50 uppercase mb-2 flex justify-between">
               <span>
-                {appState.scientificVariable === 'temperature' ? 'Sea Water Temp' : 
-                 appState.scientificVariable === 'salinity' ? 'Practical Salinity' : 'Ocean Current Speed'}
-              </span>
-              <span>
                 {appState.scientificVariable === 'temperature' ? '°C' : 
-                 appState.scientificVariable === 'salinity' ? 'PSU' : 'm/s'}
+                 appState.scientificVariable === 'salinity' ? 'PSU' : 
+                 appState.scientificVariable === 'chlorophyll' ? 'mg/m³' : 'm/s'}
               </span>
             </h3>
             
@@ -166,16 +185,18 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
                   ? 'linear-gradient(to right, #000080, #0000ff, #00ffff, #ffff00, #ff0000, #800000)'
                   : appState.scientificVariable === 'salinity'
                   ? 'linear-gradient(to right, #330066, #008080, #ccf233)'
-                  : 'linear-gradient(to right, #1a1a66, #3380cc, #33cc80, #e6e633, #e6661a, #b31a1a)' // Turbo-like for currents
+                  : appState.scientificVariable === 'chlorophyll'
+                  ? 'linear-gradient(to right, #000080, #00ffff, #00ff00, #ffff00, #ff0000)'
+                  : 'linear-gradient(to right, #1a1a66, #3380cc, #33cc80, #e6e633, #e6661a, #b31a1a)'
               }}
             />
             
             <div className="flex justify-between text-[9px] tracking-widest text-white/50 uppercase">
               <span>
-                {isCurrents ? '0' : (appState.scientificRange ? appState.scientificRange.min.toFixed(1) : (appState.scientificVariable === 'temperature' ? '-2' : '30'))}
+                {isCurrents ? '0' : (appState.scientificRange ? appState.scientificRange.min.toFixed(1) : (appState.scientificVariable === 'temperature' ? '-2' : appState.scientificVariable === 'chlorophyll' ? '0' : '30'))}
               </span>
               <span>
-                {isCurrents ? '1.5+' : (appState.scientificRange ? appState.scientificRange.max.toFixed(1) : (appState.scientificVariable === 'temperature' ? '30+' : '38+'))}
+                {isCurrents ? '1.5+' : (appState.scientificRange ? appState.scientificRange.max.toFixed(1) : (appState.scientificVariable === 'temperature' ? '30+' : appState.scientificVariable === 'chlorophyll' ? '60+' : '38+'))}
               </span>
             </div>
           </div>
@@ -189,7 +210,7 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
                    onClick={() => setAppState(prev => ({ ...prev, currentPlaying: !prev.currentPlaying }))}
                    className="text-white hover:text-emerald-400 transition-colors"
                  >
-                   {appState.currentPlaying ? '❚❚' : '▶'}
+                   {appState.currentPlaying ? 'âšâš' : 'â–¶'}
                  </button>
                </div>
                <div className="flex justify-between items-center mb-1">
@@ -211,15 +232,15 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
             <div className="grid grid-cols-1 gap-2 text-[9px] tracking-widest text-white/40 uppercase">
               <div className="flex justify-between">
                 <span>Source</span>
-                <span className="text-white/70 text-right">{isCurrents ? 'DEMONSTRATION DATA' : 'NOAA WOA23'}</span>
+                <span className="text-white/70 text-right">{isCurrents ? 'DEMONSTRATION DATA' : appState.scientificVariable === 'chlorophyll' ? 'INCOIS IRS P4 OCM' : 'NOAA WOA23'}</span>
               </div>
               <div className="flex justify-between">
                 <span>Type</span>
-                <span className="text-white/70 text-right">{isCurrents ? 'Mathematical Model' : 'Annual Climatology'}</span>
+                <span className="text-white/70 text-right">{isCurrents ? 'Mathematical Model' : appState.scientificVariable === 'chlorophyll' ? 'Ocean Colour' : 'Annual Climatology'}</span>
               </div>
               <div className="flex justify-between">
                 <span>Res</span>
-                <span className="text-white/70 text-right">4° Subset</span>
+                <span className="text-white/70 text-right">4Â° Subset</span>
               </div>
             </div>
           </div>
@@ -244,3 +265,13 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+

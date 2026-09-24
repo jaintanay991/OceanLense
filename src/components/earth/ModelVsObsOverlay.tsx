@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from 'react';
+﻿import { useEffect, useState, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import type { AppState, SetAppState } from '../../types';
 import { Html } from '@react-three/drei';
@@ -53,7 +53,7 @@ export function ModelVsObsOverlay({ appState }: ModelVsObsOverlayProps) {
     });
   }, [isModelVsObs, modelDataset, obsDataset]);
 
-  const { matrices, colors, stats, comparisons } = useMemo(() => {
+  const { matrices, colors, comparisons } = useMemo(() => {
     if (!modelDataset || !obsDataset || !isModelVsObs) return { matrices: null, colors: null, stats: null, comparisons: [] };
     if (!scientificVariable || (scientificVariable !== 'temperature' && scientificVariable !== 'salinity')) return { matrices: null, colors: null, stats: null, comparisons: [] };
     if (activeObservations.length === 0) return { matrices: null, colors: null, stats: null, comparisons: [] };
@@ -245,90 +245,7 @@ export function ModelVsObsOverlay({ appState }: ModelVsObsOverlayProps) {
         </Html>
       )}
 
-      {/* Statistics Panel */}
-      {stats && (
-        <Html fullscreen style={{ pointerEvents: 'none' }} zIndexRange={[50,0]}>
-          <div className="absolute left-6 bottom-32 bg-[#020408]/90 backdrop-blur-md border border-red-500/30 rounded-lg p-4 shadow-[0_0_20px_rgba(255,0,0,0.1)] w-64 pointer-events-auto">
-            <h3 className="text-red-400 text-[10px] font-bold tracking-widest uppercase mb-3 pb-2 border-b border-white/10">Validation Metrics</h3>
-            <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
-              <div className="text-white/50 uppercase tracking-wider text-[9px]">Valid Matches</div>
-              <div className="text-white text-right font-mono">{stats.count}</div>
-              
-              <div className="text-white/50 uppercase tracking-wider text-[9px]">Bias (Obs - Mod)</div>
-              <div className="text-white text-right font-mono">{(stats.bias > 0 ? '+' : '')}{stats.bias.toFixed(3)}</div>
-              
-              <div className="text-white/50 uppercase tracking-wider text-[9px]">MAE</div>
-              <div className="text-white text-right font-mono">{stats.mae.toFixed(3)}</div>
-              
-              <div className="text-white/50 uppercase tracking-wider text-[9px]">RMSE</div>
-              <div className="text-red-400 text-right font-mono font-bold">{stats.rmse.toFixed(3)}</div>
-            </div>
-
-            {/* Scatter Plot */}
-            {stats.count > 1 && (
-              <div className="mt-4 pt-3 border-t border-white/10">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[9px] text-white/50 uppercase tracking-widest">Scatter (Mod vs Obs)</span>
-                  <span className="text-[9px] text-cyan-400 font-mono">R = {stats.r.toFixed(3)}</span>
-                </div>
-                <div className="relative w-full aspect-square bg-black/40 border border-white/5 rounded overflow-hidden">
-                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-                    {/* 1:1 Reference Line */}
-                    <line x1="0" y1="100" x2="100" y2="0" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="2,2" />
-                    
-                    {/* Points */}
-                    {(() => {
-                      const minModel = Math.min(...comparisons.map((c: any) => c.modelVal));
-                      const maxModel = Math.max(...comparisons.map((c: any) => c.modelVal));
-                      const minObs = Math.min(...comparisons.map((c: any) => c.obsVal));
-                      const maxObs = Math.max(...comparisons.map((c: any) => c.obsVal));
-                      const globalMin = Math.min(minModel, minObs);
-                      const globalMax = Math.max(maxModel, maxObs);
-                      const range = globalMax - globalMin || 1;
-
-                      return comparisons.map((c: any, i: number) => {
-                        const cx = ((c.modelVal - globalMin) / range) * 100;
-                        const cy = 100 - ((c.obsVal - globalMin) / range) * 100;
-                        return (
-                          <circle 
-                            key={i} 
-                            cx={cx} 
-                            cy={cy} 
-                            r="1.5" 
-                            fill={c.diff > 0 ? '#f87171' : (c.diff < 0 ? '#60a5fa' : '#ffffff')} 
-                            opacity="0.6" 
-                          />
-                        );
-                      });
-                    })()}
-                  </svg>
-                  
-                  {/* Axis Labels */}
-                  <div className="absolute bottom-0 w-full text-center text-[7px] text-white/30 uppercase tracking-widest bg-black/50 backdrop-blur-sm">Model</div>
-                  <div className="absolute left-0 top-0 h-full flex items-center justify-center bg-black/50 backdrop-blur-sm" style={{ width: '12px' }}>
-                    <div className="text-[7px] text-white/30 uppercase tracking-widest transform -rotate-90 whitespace-nowrap">Obs</div>
-                  </div>
-                </div>
-              </div>
-            )}
             
-            {/* Color scale legend */}
-            <div className="mt-4 pt-3 border-t border-white/10">
-              <div className="flex justify-between text-[8px] text-white/50 uppercase tracking-widest mb-1">
-                <span>Model &gt; Obs</span>
-                <span>Obs &gt; Model</span>
-              </div>
-              <div className="h-1.5 w-full rounded-full bg-gradient-to-r from-blue-500 via-white to-red-500" />
-              <div className="flex justify-between text-[8px] text-white/50 font-mono mt-1">
-                <span>-{scientificVariable === 'temperature' ? '2.0' : '0.5'}</span>
-                <span>0</span>
-                <span>+{scientificVariable === 'temperature' ? '2.0' : '0.5'}</span>
-              </div>
-            </div>
-          </div>
-        </Html>
-      )}
-
       {/* Hover Tooltip */}
       {hoveredData && (
         <Html position={[
@@ -356,3 +273,6 @@ export function ModelVsObsOverlay({ appState }: ModelVsObsOverlayProps) {
     </>
   );
 }
+
+
+

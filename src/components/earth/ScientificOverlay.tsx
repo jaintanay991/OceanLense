@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from 'react';
+﻿import { useEffect, useState, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { AppState, SetAppState } from '../../types';
@@ -49,6 +49,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
 
   useEffect(() => {
     if (!scientificVariable && !dataset) return; // Don't fetch until needed
+    if (scientificVariable === 'chlorophyll') return; // Do not fetch anything for chlorophyll yet
     if (dataset) return; // Already fetched
 
     setLoading(true);
@@ -66,7 +67,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
   }, [scientificVariable]);
 
   const texture = useMemo(() => {
-    if (!dataset || !scientificVariable || scientificVariable === 'currents') return null;
+    if (!dataset || !scientificVariable || scientificVariable === 'currents' || scientificVariable === 'chlorophyll') return null;
     
     const variableData = dataset.variables[scientificVariable];
     if (!variableData || !variableData.data) return null;
@@ -138,7 +139,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
 
   const uniforms = useMemo(() => ({
     uData: { value: null as THREE.DataTexture | null },
-    uIsTemperature: { value: 1.0 },
+    uVariableType: { value: 0.0 },
     uOpacity: { value: 0.0 }
   }), []);
 
@@ -146,7 +147,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
     if (materialRef.current) {
       if (scientificVariable && texture) {
         uniforms.uData.value = texture.tex;
-        uniforms.uIsTemperature.value = scientificVariable === 'temperature' ? 1.0 : 0.0;
+        uniforms.uVariableType.value = scientificVariable === 'temperature' ? 1.0 : (scientificVariable === 'chlorophyll' ? 2.0 : 0.0);
         // Direct assignment to fix lerp bug and ensure UI slider is perfectly synced
         uniforms.uOpacity.value = appState.isModelVsObs ? 0.0 : appState.scientificOpacity;
       } else {
@@ -210,7 +211,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
           `}
           fragmentShader={`
             uniform sampler2D uData;
-            uniform float uIsTemperature;
+            uniform float uVariableType;
             uniform float uOpacity;
             varying vec2 vUv;
 
@@ -286,3 +287,4 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
     </>
   );
 }
+

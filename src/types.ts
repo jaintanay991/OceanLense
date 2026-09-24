@@ -2,7 +2,7 @@ export interface AppState {
   activeRegionType: 'GLOBAL' | 'OCEAN' | 'SEA';
   activeOceanId: string | null;
   activeSeaId: string | null;
-  scientificVariable: 'temperature' | 'salinity' | 'currents' | null;
+  scientificVariable: 'temperature' | 'salinity' | 'chlorophyll' | 'currents' | null;
   scientificDepth: number;
   scientificOpacity: number;
   scientificRange: { min: number, max: number } | null;
