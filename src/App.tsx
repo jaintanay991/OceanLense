@@ -1,9 +1,12 @@
-import { useState, Suspense, useCallback } from 'react';
+import { useState, useEffect, Suspense, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html, useProgress } from '@react-three/drei';
 import type { AppState } from './types';
 import { EarthScene } from './scene/EarthScene';
 import { Header } from './components/ui/Header';
+import { AboutModal } from './components/ui/AboutModal';
+import { UserManualModal } from './components/ui/UserManualModal';
+import { HoverGraphPopup } from './components/ui/HoverGraphPopup';
 
 import { ObservationProfile } from './components/ui/ObservationProfile';
 import { ControlsOverlay } from './components/ui/ControlsOverlay';
@@ -33,6 +36,30 @@ function CanvasLoader() {
 function App() {
   const [cinematicMode, setCinematicMode] = useState(false);
   const [resetTrigger, setResetTrigger] = useState(0);
+
+  const [showAbout, setShowAbout] = useState(false);
+  const [showManual, setShowManual] = useState(false);
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem('oceanlens_onboarded');
+    if (!seen) {
+      setShowAbout(true);
+    }
+  }, []);
+
+  const handleCloseAbout = () => {
+    setShowAbout(false);
+    if (!sessionStorage.getItem('oceanlens_onboarded')) {
+      setShowManual(true);
+    }
+  };
+
+  const handleCloseManual = () => {
+    setShowManual(false);
+    if (!sessionStorage.getItem('oceanlens_onboarded')) {
+      sessionStorage.setItem('oceanlens_onboarded', 'true');
+    }
+  };
 
   const [appState, setAppState] = useState<AppState>({
     activeRegionType: 'GLOBAL',
@@ -72,7 +99,11 @@ function App() {
       className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center"
       style={{ width: '100vw', height: '100vh', backgroundColor: '#000' }}
     >
-      <Header cinematicMode={cinematicMode} />
+      <Header 
+        cinematicMode={cinematicMode} 
+        onOpenAbout={() => setShowAbout(true)} 
+        onOpenManual={() => setShowManual(true)} 
+      />
       
       <ErrorBoundary>
         <div 
@@ -106,6 +137,10 @@ function App() {
       />
       <ScientificControls appState={appState} setAppState={setAppState} />
       <ObservationProfile appState={appState} setAppState={setAppState} />
+      
+      <AboutModal isOpen={showAbout} onClose={handleCloseAbout} />
+      <UserManualModal isOpen={showManual} onClose={handleCloseManual} />
+      <HoverGraphPopup />
     </div>
   );
 }

@@ -134,6 +134,7 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
   useEffect(() => {
     if (appState.isModelVsObs) {
       setHoverInfo(null);
+          window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
     }
   }, [appState.isModelVsObs]);
 
@@ -182,14 +183,17 @@ export function ScientificOverlay({ appState, setAppState }: ScientificOverlayPr
        
        if (val !== null && val !== undefined && val > -100) {
           setHoverInfo({ point: e.point.clone(), lat, lon, val });
+          window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: { variable: scientificVariable, lat, lon, val, depth: scientificDepth, time: 'Decadal Annual Climatology' } }));
        } else {
           setHoverInfo(null);
+          window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
        }
     }
   };
 
   const handlePointerOut = () => {
     setHoverInfo(null);
+          window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
   };
 
   return (

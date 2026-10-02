@@ -1,6 +1,6 @@
 ﻿import { useState, useRef, useEffect } from 'react';
 import type { AppState, SetAppState } from '../../types';
-import { Layers } from 'lucide-react';
+import { Layers, X } from 'lucide-react';
 
 interface ScientificControlsProps {
   appState: AppState;
@@ -8,6 +8,21 @@ interface ScientificControlsProps {
 }
 
 export function ScientificControls({ appState, setAppState }: ScientificControlsProps) {
+  const [activeInfoPopup, setActiveInfoPopup] = useState<string | null>(null);
+  const [isGraphActive, setIsGraphActive] = useState(false);
+  useEffect(() => {
+    const handler = (e: any) => setIsGraphActive(e.detail !== null);
+    window.addEventListener('oceanDataHover', handler);
+    return () => window.removeEventListener('oceanDataHover', handler);
+  }, []);
+
+  const INFO_CONTENT: Record<string, { title: string, desc: string }> = {
+    argo: { title: 'Argo Floats', desc: 'Argo floats are autonomous robotic instruments that move vertically through the ocean and measure parameters such as temperature, salinity and pressure/depth. They provide valuable subsurface ocean observations across large regions.' },
+    glider: { title: 'Ocean Gliders', desc: 'Ocean gliders are autonomous underwater vehicles that use changes in buoyancy to move through the ocean. They collect measurements such as temperature, salinity and depth along their travel path, providing detailed regional ocean observations.' },
+    ctd: { title: 'CTD', desc: 'CTD stands for Conductivity, Temperature and Depth. It is an oceanographic instrument used to measure seawater conductivity, temperature and pressure/depth, which helps determine salinity and understand the physical structure of the ocean.' },
+    bgc: { title: 'BGC-Argo', desc: 'BGC-Argo stands for Biogeochemical-Argo. These are advanced Argo floats equipped with additional sensors to measure properties such as dissolved oxygen, chlorophyll, nitrate, pH and other biogeochemical parameters, helping study the biological and chemical processes of the ocean.' }
+  };
+
   const [initialHeight, setInitialHeight] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -36,6 +51,7 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
   const isSurfaceOnly = isCurrents || appState.scientificVariable === 'chlorophyll';
 
   return (
+    <>
     <div ref={containerRef} className="absolute left-6 bottom-6 z-10 w-64 max-h-[calc(100vh-140px)] overflow-y-auto scientific-controls-scroll" style={{ height: initialHeight ? initialHeight + 'px' : 'auto' }}>
       {/* Variable Toggle */}
       <div className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-4 mb-4 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
@@ -109,12 +125,16 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
                 <button
                   key={obs.id}
                   onClick={() => {
+                    const isTurningOn = !isActive;
                     setAppState(prev => ({
                       ...prev,
-                      activeObservations: isActive 
-                        ? prev.activeObservations.filter(id => id !== obs.id)
-                        : [...prev.activeObservations, obs.id as any]
+                      activeObservations: isTurningOn 
+                        ? [...prev.activeObservations, obs.id as any]
+                        : prev.activeObservations.filter(id => id !== obs.id)
                     }));
+                    if (isTurningOn) {
+                      setActiveInfoPopup(obs.id);
+                    }
                   }}
                   className={`flex items-center px-2 py-1.5 rounded text-[10px] tracking-widest uppercase transition-all duration-300 border ${
                     isActive 
@@ -263,6 +283,27 @@ export function ScientificControls({ appState, setAppState }: ScientificControls
         </div>
       )}
     </div>
+      {!isGraphActive && activeInfoPopup && INFO_CONTENT[activeInfoPopup] && (
+        <div className="absolute top-32 right-6 z-20 w-80 bg-slate-900/95 backdrop-blur-xl rounded-xl border border-cyan-500/30 shadow-[0_0_30px_rgba(0,240,255,0.15)] flex flex-col overflow-hidden transition-all duration-300">
+          <div className="p-4 border-b border-white/10 flex justify-between items-center">
+            <h2 className="font-bold text-sm tracking-wider uppercase text-cyan-400">
+              {INFO_CONTENT[activeInfoPopup].title}
+            </h2>
+            <button 
+              onClick={() => setActiveInfoPopup(null)} 
+              className="text-white/50 hover:text-white transition-colors"
+            >
+              <X size={16} />
+            </button>
+          </div>
+          <div className="p-4">
+            <p className="text-white/80 text-xs leading-relaxed">
+              {INFO_CONTENT[activeInfoPopup].desc}
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

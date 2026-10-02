@@ -206,8 +206,10 @@ export function CurrentOverlay({ appState, setAppState: _setAppState }: CurrentO
        if (uVal !== null && vVal !== null) {
           const speed = Math.sqrt(uVal*uVal + vVal*vVal);
           setHoverInfo({ point: e.point.clone(), lat, lon, u: uVal, v: vVal, speed });
+          window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: { variable: 'currents', lat, lon, u: uVal, v: vVal, speed, depth: 'Surface', time: 'DEMO TIMESTEP' } }));
        } else {
           setHoverInfo(null);
+    window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
        }
     }
   };

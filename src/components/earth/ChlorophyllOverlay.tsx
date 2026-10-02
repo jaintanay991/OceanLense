@@ -133,6 +133,7 @@ export function ChlorophyllOverlay({ appState, setAppState }: ChlorophyllOverlay
   useEffect(() => {
     if (appState.isModelVsObs) {
       setHoverInfo(null);
+    window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
     }
   }, [appState.isModelVsObs]);
 
@@ -174,17 +175,21 @@ export function ChlorophyllOverlay({ appState, setAppState }: ChlorophyllOverlay
            
            if (val !== undefined && val > 0) {
               setHoverInfo({ point: e.point.clone(), lat, lon, val });
+              window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: { variable: 'chlorophyll', lat, lon, val, depth: 'Surface', time: '2023-01-01T00:00:00Z' } }));
            } else {
               setHoverInfo({ point: e.point.clone(), lat, lon, val: null });
+              window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: { variable: 'chlorophyll', lat, lon, val: null } }));
            }
        } else {
            setHoverInfo({ point: e.point.clone(), lat, lon, val: null });
+              window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: { variable: 'chlorophyll', lat, lon, val: null } }));
        }
     }
   };
 
   const handlePointerOut = () => {
     setHoverInfo(null);
+    window.dispatchEvent(new CustomEvent('oceanDataHover', { detail: null }));
   };
 
   return (
